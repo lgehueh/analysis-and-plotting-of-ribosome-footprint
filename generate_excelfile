@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Aug 14 17:04:20 2023
+
+@author: smelab
+"""
+import pandas as pd
+from plotting_reads_from_sorted_BAM_file import plotting_sorted_BAM
+
+# with open("file.txt","a+") as file1:
+# 	for ele in a:
+# 		file1.write(str(ele)+"\n")
+#break
+# d1=plotting_sorted_BAM('LDHB','NM_002300.8',['SRR1630833'])
+# d11=plotting_sorted_BAM('LDHB','NM_002300.8',['SRR1630831'])
+# d2=plotting_sorted_BAM('MDH1', 'NM_005917.4',['SRR1630831'])
+# d22=plotting_sorted_BAM('MDH1', 'NM_005917.4',['SRR1630833'])
+# # d3=plotting_sorted_BAM('AGO1', 'NM_012199.5',['SRR1257257'])
+# # d4=plotting_sorted_BAM('MTCH2','NM_014342.4', ['SRR1630830'])
+# excel_data=pd.concat([d1,d11,d2,d22],axis=0,ignore_index=True)
+# excel_data.to_excel('ldh_mdh_excel_data.xlsx',index=False)
+
+ago=['SRR1605309','SRR2052945','SRR5013257','SRR2096965','SRR5345623','SRR4293695']
+data=[]
+for sra in ago:
+    data.append(plotting_sorted_BAM('AGO1', 'NM_012199.5',[sra]))
+    
+excel_data=pd.concat(data,axis=0,ignore_index=True)
+excel_data.to_excel('ago1_excel_data.xlsx',index=False)    
