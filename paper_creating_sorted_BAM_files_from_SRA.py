@@ -97,7 +97,7 @@ for sra_accession in sra_accessions:
         continue
     
     # Convert the SAM file to a BAM file
-    bam_filename = f"{sra_acces sion}_aligned_reads.bam"
+    bam_filename = f"{sra_accession}_aligned_reads.bam"
     samfile = pysam.AlignmentFile(sam_filename, "r")
     bamfile = pysam.AlignmentFile(bam_filename, "wb", template=samfile)
     for read in samfile:
