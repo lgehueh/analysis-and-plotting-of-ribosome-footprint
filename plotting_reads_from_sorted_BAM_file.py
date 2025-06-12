@@ -132,12 +132,27 @@ def plotting_sorted_BAM(gene_name,entrez_id,list_of_files=None):
         fig.suptitle(gene_name+'_'+re.findall('SRR\d*', filename)[0], fontsize=20 )
         fig.savefig(location+gene_name+'_'+re.findall('SRR\d*', filename)[0]+'.png', dpi=300)
         plt.show()
-        RD_CDS=np.sum(a[start+12:stop1+1])/len(a[start+12:stop1+1])
-        RD_ISR=np.sum(a[stop1+12:stop2+1])/len(a[stop1+12:stop2+1])
-        RD_rem_utr=np.sum(a[stop2+12:stop2+212])/len(a[stop2+12:stop2+212])
-        percent_RT=RD_ISR/RD_CDS*100
-        table_data=np.array([entrez_id,gene_name ,srr,length_gene,utr_length,RD_CDS ,RD_ISR,RD_rem_utr,percent_RT])
-        table_data=pd.DataFrame(table_data.reshape(1,len(table_data)),columns=["gene id","gene name","SRR no","transcript\nlength","3'-UTR\nlength",'RD CDS',"RD ISR","RD rem 3'-UTR","percent RT"])
+        #RD_CDS=np.sum(a[start+12:stop1+1])/len(a[start+12:stop1+1])
+        #RD_ISR=np.sum(a[stop1+12:stop2+1])/len(a[stop1+12:stop2+1])
+        #RD_rem_utr=np.sum(a[stop2+12:stop2+212])/len(a[stop2+12:stop2+212])
+        #percent_RT=RD_ISR/RD_CDS*100
+        
+        g4_start, g4_end = g4_coords[entrez_id]
+        up_start=max(0,g4_start-30)
+        up_end=g4_start-1
+        down_start=g4_end+1
+        down_end=min(length_gene-1, g4_end+30)
+        rd_g4=np.sum(a[g4_start:g4_end+1])/30
+        rd_up=np.sum(a[up_start:up_end+1])/30
+        rd_down=np.sum(a[down_start:down_end+1])/30
+        
+        #table_data=np.array([entrez_id,gene_name ,srr,length_gene,utr_length,RD_CDS ,RD_ISR,RD_rem_utr,percent_RT])
+        #table_data=pd.DataFrame(table_data.reshape(1,len(table_data)),columns=["gene id","gene name","SRR no","transcript\nlength","3'-UTR\nlength",'RD CDS',"RD ISR","RD rem 3'-UTR","percent RT"])
+        table_data=pd.DataFrame([[entrez_id, gene_name, srr, length_gene, rd_up, rd_g4, rd_down]], columns=["Gene ID", "Gene Name", "SRR No", "Length", "RPBM Upstream", "RPBM G4", "RPBM Downstream"])
+    if 'all_tables' not in locals():
+        all_tables=table_data
+    else:
+        all_tables=pd.concat([all_tables, table_data], ignore_index=True)
     '''        
     a_total_rpm = (a_total / total_reads_all_srrs ) * 1e6 #calculating RPM
     fig,ax=plt.subplots(1,1,figsize=[16,8],)
@@ -152,6 +167,7 @@ def plotting_sorted_BAM(gene_name,entrez_id,list_of_files=None):
     plt.show()
     '''
     return table_data
+    return all_tables
 
 # with open("file.txt","a+") as file1:
 # 	for ele in a:
