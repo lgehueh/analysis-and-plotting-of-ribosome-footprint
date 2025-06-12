@@ -143,9 +143,9 @@ def plotting_sorted_BAM(gene_name,entrez_id,list_of_files=None,g4_coords=None):
         up_end=g4_start-1
         down_start=g4_end+1
         down_end=min(length_gene-1, g4_end+30)
-        rd_g4=np.sum(a[g4_start:g4_end+1])/g4_end-g4_start+1)
-        rd_up=np.sum(a[up_start:up_end+1])/up_end-up_start+1)
-        rd_down=np.sum(a[down_start:down_end+1])/down_end-down_start+1)
+        rd_g4=np.sum(a[g4_start:g4_end+1])/(g4_end-g4_start+1)
+        rd_up=np.sum(a[up_start:up_end+1])/(up_end-up_start+1)
+        rd_down=np.sum(a[down_start:down_end+1])/(down_end-down_start+1)
         
         #table_data=np.array([entrez_id,gene_name ,srr,length_gene,utr_length,RD_CDS ,RD_ISR,RD_rem_utr,percent_RT])
         #table_data=pd.DataFrame(table_data.reshape(1,len(table_data)),columns=["gene id","gene name","SRR no","transcript\nlength","3'-UTR\nlength",'RD CDS',"RD ISR","RD rem 3'-UTR","percent RT"])
