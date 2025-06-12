@@ -19,9 +19,9 @@ gene_name='sorted_bam_files'
 # sra_accessions=[i.replace("\n",'') for i in sra_accessions]
 #mtch2=['SRR3665720','SRR606204','SRR3623564','SRR2724718','SRR3623564','SRR1382096'] +['SRR1630813']
 #ago=['SRR1605309','SRR2052945','SRR5013257','SRR2096965','SRR5345623','SRR4293695']
-sra_accessions=['SRR5013257']
+sra_accessions=['SRR970561', 'SRR970587', 'SRR970538','SRR970565','SRR970490','SRR970588']
 
-transcript_filename = "transcripts.fasta"# Replace with your transcript filename
+transcript_filename = "transcript11.fasta"# Replace with your transcript filename
 
 g4_coords={ "NM_002618.4": (1047,1076)} #write the G4 region span here based on trancript coordinate system
 genes_to_process = [("PEX14", "NM_002618.4")]
