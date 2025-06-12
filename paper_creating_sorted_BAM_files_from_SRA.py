@@ -23,7 +23,18 @@ sra_accessions=['SRR970561', 'SRR970587', 'SRR970538','SRR970565','SRR970490','S
 
 transcript_filename = "transcript11.fasta"# Replace with your transcript filename
 
-g4_coords={ "NM_002618.4": (1047,1076)} #write the G4 region span here based on trancript coordinate system
+g4_coords={ "NM_004565.3":(1047,1076),
+"NM_000418.4":(2057,2086),
+"NM_014727.3":(288,309),
+"NM_014727.3":(3157,3185),
+"NM_001164586.2":(7837,7866),
+"NM_001033910.3":(1407,1424),
+"NM_001077268.2":(614,636),
+"NM_020832.3":(1467,1496),
+"NM_052857.4":(522,551),
+"NM_015355.4":(351,380),
+"NM_024619.4":(419,448),
+"NM_002024.6":(1810,1838)} #write the G4 region span here based on trancript coordinate system
 genes_to_process = [("PEX14","NM_004565.3"),
 ("IL4R","NM_000418.4"),
 ("MLL4 (KMT2B)","NM_014727.3"),
