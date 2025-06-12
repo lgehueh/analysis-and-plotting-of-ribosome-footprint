@@ -60,7 +60,7 @@ def gene_informn(entrez_id):
                                                          "UTR_length":len(UTR_seq)}
             break
     return gene_info
-def plotting_sorted_BAM(gene_name,entrez_id,list_of_files=None):
+def plotting_sorted_BAM(gene_name,entrez_id,list_of_files=None,g4_coords=None):
     '''
     This function counts the reads from a sorted BAM file and returns a plot.
 
@@ -79,11 +79,12 @@ def plotting_sorted_BAM(gene_name,entrez_id,list_of_files=None):
     -------
     '''
     gene_info=gene_informn(entrez_id)
+    g4_start,g4_end= g4_coords[entrez_id]
     start = gene_info[entrez_id]['start']
     stop1 = gene_info[entrez_id]['stop1']
     stop2 = gene_info[entrez_id]['stop2']
     length_gene=gene_info[entrez_id]["length_gene"]
-    utr_length=gene_info[entrez_id]["UTR_length"]
+    ##utr_length=gene_info[entrez_id]["UTR_length"]
 
     location = "./%s/" %gene_name
     if os.path.isdir(location) == False:
