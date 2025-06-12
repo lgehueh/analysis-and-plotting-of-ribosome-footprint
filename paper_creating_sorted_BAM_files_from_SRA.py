@@ -97,7 +97,7 @@ for sra_accession in sra_accessions:
         continue
     
     # Convert the SAM file to a BAM file
-    bam_filename = f"{sra_accession}_aligned_reads.bam"
+    bam_filename = f"{sra_acces sion}_aligned_reads.bam"
     samfile = pysam.AlignmentFile(sam_filename, "r")
     bamfile = pysam.AlignmentFile(bam_filename, "wb", template=samfile)
     for read in samfile:
@@ -107,6 +107,8 @@ for sra_accession in sra_accessions:
     
     # Sort the BAM file
     sorted_bam_filename = gene_name+'/'+f"{sra_accession}_aligned_reads.sorted.bam"
+    os.makedirs(os.path.dirname(sorted_bam_filename), exist_ok=True)
+
     pysam.sort("-o", sorted_bam_filename, bam_filename)
     os.remove(bam_filename)
 
