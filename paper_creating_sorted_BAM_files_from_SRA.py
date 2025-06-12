@@ -24,7 +24,18 @@ sra_accessions=['SRR970561', 'SRR970587', 'SRR970538','SRR970565','SRR970490','S
 transcript_filename = "transcript11.fasta"# Replace with your transcript filename
 
 g4_coords={ "NM_002618.4": (1047,1076)} #write the G4 region span here based on trancript coordinate system
-genes_to_process = [("PEX14", "NM_002618.4")]
+genes_to_process = [("PEX14","NM_004565.3"),
+("IL4R","NM_000418.4"),
+("MLL4 (KMT2B)","NM_014727.3"),
+("IGFN1","NM_001164586.2")
+("TRAF5","NM_001033910.3")
+("ZFYVE19","NM_001077268.2")
+("ZNF687","NM_020832.3")
+("ZNF830","NM_052857.4")
+("SUZ12","NM_015355.4")
+("FN3KRP","NM_024619.4")
+("FMR1","NM_002024.6")]
+
 # Build the bowtie2 index for the transcript
 bowtie2_build_command = ["/home/smelab/bowtie2/bowtie2-build", transcript_filename, "transcript"]
 subprocess.check_call(bowtie2_build_command)
