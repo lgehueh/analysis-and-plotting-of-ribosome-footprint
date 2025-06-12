@@ -21,8 +21,10 @@ gene_name='sorted_bam_files'
 #ago=['SRR1605309','SRR2052945','SRR5013257','SRR2096965','SRR5345623','SRR4293695']
 sra_accessions=['SRR5013257']
 
-transcript_filename = "transcripts.fasta"  # Replace with your transcript filename
+transcript_filename = "transcripts.fasta"# Replace with your transcript filename
 
+g4_coords={ "NM_002618.4": (1047,1076)} #write the G4 region span here based on trancript coordinate system
+genes_to_process = [("PEX14", "NM_002618.4")]
 # Build the bowtie2 index for the transcript
 bowtie2_build_command = ["/home/smelab/bowtie2/bowtie2-build", transcript_filename, "transcript"]
 subprocess.check_call(bowtie2_build_command)
@@ -104,6 +106,32 @@ for sra_accession in sra_accessions:
 
 # Print the total number of mapped reads across all SRAs
 print(f"Total number of mapped reads: {total_reads}")
+
+from plotting_reads_from_sorted_BAM_file import plotting_sorted_BAM
+
+all_gene_data = []
+
+for gene_name, entrez_id in genes_to_process:
+    print(f"\nProcessing {gene_name} ({entrez_id})...")
+    if entrez_id not in g4_coords:
+        print(f"G4 coordinates not defined for {entrez_id}. Skipping.")
+        continue
+    df = plotting_sorted_BAM(
+        gene_name,
+        entrez_id,
+        list_of_files=sra_accessions,
+        g4_coords=g4_coords  # ← pass G4 positions
+    )
+    all_gene_data.append(df)
+
+# Merge and save all results
+if all_gene_data:
+    final_df = pd.concat(all_gene_data, ignore_index=True)
+    final_df.to_excel("G4_RPBM_All_Genes.xlsx", index=False)
+    print("Saved: G4_RPBM_All_Genes.xlsx")
+else:
+    print("No gene data was processed.")
+
 
 # Count the number of index files
 index_files = [filename for filename in os.listdir(".") if filename.startswith("transcript.")]
