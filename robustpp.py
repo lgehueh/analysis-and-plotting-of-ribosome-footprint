@@ -46,14 +46,14 @@ class RobustRNASeqPipeline:
         """Load configuration with defaults"""
         default_config = {
             "tools": {
-                "bowtie2_build": "bowtie2-build",
-                "bowtie2": "bowtie2", 
-                "fastq_dump": "fastq-dump"
+                "bowtie2_build": "/media/smelab/7A48AB9348AB4CA7/bowtie2-build",
+                "bowtie2": "/media/smelab/7A48AB9348AB4CA7/bowtie2", 
+                "fastq_dump": "/media/smelab/7A48AB9348AB4CA7/fastq-dump"
             },
             "directories": {
                 "output": "sorted_bam_files",
                 "temp": "temp_files",
-                "home": str(Path.home())
+                "home": "/media/smelab/7A48AB9348AB4CA7"
             },
             "parameters": {
                 "bowtie2_threads": "4",
